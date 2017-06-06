@@ -12,5 +12,4 @@ TBD
 
 Copyright © 2017 Starship Hackers
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Licensed under the Apache License, Version 2.0.
