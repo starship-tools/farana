@@ -8,3 +8,5 @@ pom.xml.asc
 /.lein-*
 /.nrepl-*
 /felix
+/examples/*/felix-*
+/examples/*/target
