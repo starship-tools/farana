@@ -6,6 +6,5 @@ pom.xml.asc
 *.jar
 *.class
 /.lein-*
-/.nrepl-port
-.hgignore
-.hg/
+/.nrepl-*
+/felix
