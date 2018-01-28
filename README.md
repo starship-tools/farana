@@ -16,7 +16,7 @@ $ lein felix setup
 Downloading Felix ...
 Unpacking Felix ...
 Felix setup completed.
-You can now start the Felix shell with 'lein felix-sh'.
+You can now start the Felix shell with 'lein felix shell'.
 ```
 ```
 $ lein felix shell

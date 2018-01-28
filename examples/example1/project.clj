@@ -11,7 +11,7 @@
   :plugins [
     [lein-bnd "0.1.0"]
     [lein-bundle "0.1.1"]
-    [lein-felix "0.1.0"]]
+    [lein-felix "0.1.1"]]
   :profiles {
     :uberjar {:aot :all}}
   :bnd {

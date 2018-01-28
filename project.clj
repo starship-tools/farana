@@ -29,7 +29,7 @@
     [org.apache.felix/org.apache.felix.main "5.6.10"]
     [org.clojure/clojure "1.8.0"]]
   :plugins [
-    [lein-felix "0.1.0"]]
+    [lein-felix "0.1.1"]]
   :profiles {
     :base {
       :plugins [
