@@ -15,8 +15,9 @@ $ lein felix setup
 ```
 Downloading Felix ...
 Unpacking Felix ...
+Created script 'bin/felix'.
 Felix setup completed.
-You can now start the Felix shell with 'lein felix shell'.
+You can now start the Felix shell with 'bin/felix'.
 ```
 ```
 $ lein felix shell

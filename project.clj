@@ -29,19 +29,16 @@
     [org.apache.felix/org.apache.felix.main "5.6.10"]
     [org.clojure/clojure "1.8.0"]]
   :plugins [
-    [lein-felix "0.1.1"]]
+    [lein-felix "0.2.0-SNAPSHOT"]]
   :profiles {
-    :base {
-      :plugins [
-        [lein-shell "0.5.0"]]}
     :felix-shell {
       :shell {
         :dir ~felix-dir}}
     :custom-repl {
       :repl-options {
         :init-ns farana.dev
-        :prompt ~get-prompt
-        :init ~(println (get-banner))}}
+        ;:init ~(println (get-banner))
+        :prompt ~get-prompt}}
     :dev {
       :source-paths ["dev-resources/src"]
       :dependencies [
