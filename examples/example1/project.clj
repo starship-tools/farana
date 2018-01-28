@@ -4,13 +4,16 @@
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
-    [org.apache.felix/org.apache.felix.framework "5.6.4"]
-    [org.clojure/clojure "1.8.0"]
-    [clojusc/trifl "0.1.0-SNAPSHOT"]
-    [clojusc/twig "0.3.2-SNAPSHOT" :exclusions [org.clojure/clojurescript]]]
+    [clojusc/trifl "0.2.0"]
+    [clojusc/twig "0.3.2"]
+    [org.apache.felix/org.apache.felix.framework "5.6.10"]
+    [org.clojure/clojure "1.8.0"]]
+  :plugins [
+    [lein-bnd "0.1.0"]
+    [lein-bundle "0.1.1"]]
   :profiles {
     :uberjar {:aot :all}}
-  :manifest {
+  :bnd {
     "Bundle-Name" "Service listener example"
     "Bundle-Description" "A bundle that displays messages at startup and when service events occur"
     "Bundle-Vendor" "Clojure Faraną"
