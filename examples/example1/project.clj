@@ -10,7 +10,8 @@
     [org.clojure/clojure "1.8.0"]]
   :plugins [
     [lein-bnd "0.1.0"]
-    [lein-bundle "0.1.1"]]
+    [lein-bundle "0.1.1"]
+    [lein-felix "0.1.0"]]
   :profiles {
     :uberjar {:aot :all}}
   :bnd {

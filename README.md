@@ -5,12 +5,12 @@
 
 ## Usage
 
-Before using farana and Felix, you need to set up and start Felix. The 
+Before using farana and Felix, you need to set up and start Felix. The
 following commands download, locally install, and run the latest supported
 version of Felix:
 
 ```
-$ lein setup-felix
+$ lein felix setup
 ```
 ```
 Downloading Felix ...
@@ -19,7 +19,7 @@ Felix setup completed.
 You can now start the Felix shell with 'lein felix-sh'.
 ```
 ```
-$ lein felix-sh
+$ lein felix shell
 ```
 
 

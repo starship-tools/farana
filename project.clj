@@ -28,6 +28,8 @@
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
     [org.apache.felix/org.apache.felix.main "5.6.10"]
     [org.clojure/clojure "1.8.0"]]
+  :plugins [
+    [lein-felix "0.1.0"]]
   :profiles {
     :base {
       :plugins [
@@ -54,37 +56,6 @@
         [lein-kibit "0.1.5" :exclusions [org.clojure/clojure]]
         [lein-ancient "0.6.10"]]}}
   :aliases {
-    ;; Setup
-    "download-felix"
-      ["with-profile" "base" "do" 
-        ["shell" "echo" "Downloading Felix ..."]
-        ["shell" "curl" "-sO" ~(str felix-host "/felix/" felix-dist-file)]]
-    "move-felix"
-      ["with-profile" "base" "do" 
-        ["shell" "mkdir" ~felix-install-dir]
-        ["shell" "mv" ~felix-dist-file ~felix-install-dir]]
-    "unpack-felix"
-      ["with-profile" "base" "do" 
-        ["shell" "echo" "Unpacking Felix ..."]
-        ["shell" "unzip" "-qq" ~(str felix-install-dir "/" felix-dist-file) 
-                         "-d" ~felix-install-dir]]
-    "setup-felix"
-      ["do" 
-        ["download-felix"]
-        ["move-felix"]
-        ["unpack-felix"]
-        ["with-profile" "base" "do"
-          ["shell" "echo" "Felix setup completed."]
-          ["shell" "echo" "You can now start the Felix shell with 'lein felix-sh'."]
-          ["shell" "echo"]]]
-    ;; Felix
-    "felix-sh"
-      ["with-profile" "base,felix-shell" "do" 
-        ["shell" "echo"]
-        ["shell" "echo" "Starting Felix ..."]
-        ["shell" "echo" "To stop the Felix shell, type ^D"]
-        ["shell" "echo"]
-        ["shell" "java" "-jar" ~felix-jar]]
     ;; Dev
     "repl"
       ^{:doc "A custom blog REPL that overrides the default one"}
