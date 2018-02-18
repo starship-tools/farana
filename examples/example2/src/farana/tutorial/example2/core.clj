@@ -39,9 +39,9 @@
     ;;      #'farana.bundle.context/register-service
     ;; (context/register-service ctx
     (.registerService ctx
-            (service/get-name)
-            (service/create-dictionary initial-words)
-            (util/map->hash-table {:language "English"}))))
+                      (service/get-name)
+                      (service/create-dictionary initial-words)
+                      (util/map->hash-table {:language "English"}))))
 
 (defn bundle-stop
   "Implements `BundleActivator.stop`. Does nothing since the framework will

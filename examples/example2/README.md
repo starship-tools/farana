@@ -112,9 +112,9 @@ The source code for our bundle is as follows:
                              "clojure"
                              "tutorial"})]
     (.registerService ctx
-            (service/get-name)
-            (service/create-dictionary initial-words)
-            (util/map->hash-table {:language "English"}))))
+                      (service/get-name)
+                      (service/create-dictionary initial-words)
+                      (util/map->hash-table {:language "English"}))))
 
 (defn bundle-stop
   [_this ^BundleContext _ctx])
