@@ -46,7 +46,7 @@ After implementing the Clojure source code for the bundle, we must also update o
 
 Here is the [project.clj file](project.clj)
 
-In particular, note the S-Expression at `:felix` -> `:maven`:
+In particular, note the s-expression at `:felix` -> `:maven`:
 
 ```clj
 [:plugin
@@ -72,3 +72,5 @@ In particular, note the S-Expression at `:felix` -> `:maven`:
 ```
 
 This will get converted to XML using the function `clojure.data.xml/sexp-as-element` and then inserted into a `pom.xml` file so that the bundle may be created properly. This approach was used in order to put as little in the way of developers that need full control over the configuration of their bundles.
+
+Some of the meta-data in that s-expression is for human consumption, for instance, when the Felix shell (Gogo) is run and the  bundles are listed with the `lb` command. Other tags affect the OSGi framework, such as `Bundle-Activator` and `Import-Package`. The `Bundle-Activator` tag tells the framework which class implements the `BundleActivator` interface. With this information, when the OSGi framework starts the bundle, an instance of the specified class is created and its `start` method is invoked. The created instance will also have its `stop` method called when the framework stops the bundle. The `Import-Package` attribute informs the framework of the bundle's dependencies on external packages. Those who are familiar with OSGi may think something is missing here, but note the `lein felix` plugin (and other plugins upon which it depends) takes care of adding OSGi and Clojure boilerplate so that you don't have to. Any packages dependencies will be verified and resolved by the OSGi framework.
