@@ -14,7 +14,8 @@ your project directory.
 
 ## First Steps
 
-To following along with the tutorial below (as well as the "Quick Start"), you will first need to do the following:
+To following along with the tutorial below (as well as the "Quick Start"), you
+will first need to do the following:
 
 1. `git clone https://github.com/starship-tools/farana.git`
 1. `cd` to `farana/examples/example1`
@@ -23,7 +24,9 @@ To following along with the tutorial below (as well as the "Quick Start"), you w
 
 ## Quick Start
 
-For the impatient, the following steps will get you running the example OSGi service on your local Felix. For the patient, the tutorial section below goes over this in more detail.
+For the impatient, the following steps will get you running the example OSGi
+service on your local Felix. For the patient, the tutorial section below goes
+over this in more detail.
 
 
 ### Build
@@ -50,13 +53,32 @@ cleanup and all the bundling with just one command.
 
 ## Tutorial
 
-This example creates a simple bundle that listens for OSGi service events. This example does not do much at first, because it only prints out the details of registering and unregistering services. In the next example we will create a bundle that implements a service, which will cause this bundle to actually do something. For now, we will just use this example to help us understand the basics of creating a bundle.
+This example creates a simple bundle that listens for OSGi service events.
+This example does not do much at first, because it only prints out the details
+of registering and unregistering services. In the next example we will create
+a bundle that implements a service, which will cause this bundle to actually
+do something. For now, we will just use this example to help us understand the
+basics of creating a bundle.
 
-A bundle gains access to the OSGi framework using a unique instance of `BundleContext`. In order for a bundle to get its unique bundle context, it must implement the `BundleActivator` interface; this interface has two methods, `start` and `stop`, that both receive the bundle's context and are called when the bundle is started and stopped, respectively. In the following source code, our bundle implements the `BundleActivator` interface and uses the context to add itself as a listener for service events. Note that while the namespace is `farana.tutorial.example1`, we have used the `:name` option in `gen-class` to compile the Clojure to a class that will match a common Java nomenclature: `farana.tutorial.example1.Activator`.
+A bundle gains access to the OSGi framework using a unique instance of
+`BundleContext`. In order for a bundle to get its unique bundle context, it
+must implement the `BundleActivator` interface; this interface has two
+methods, `start` and `stop`, that both receive the bundle's context and are
+called when the bundle is started and stopped, respectively. In the following
+source code, our bundle implements the `BundleActivator` interface and uses
+the context to add itself as a listener for service events. Note that while
+the namespace is `farana.tutorial.example1`, we have used the `:name` option
+in `gen-class` to compile the Clojure to a class that will match a common Java
+nomenclature: `farana.tutorial.example1.Activator`.
 
 Here is the code: [farana.tutorial.example1](src/farana/tutorial/example1.clj)
 
-After implementing the Clojure source code for the bundle, we must also update our `project.clj` file so that the bundle's  manifest file is created, containing the meta-data needed by the OSGi framework for manipulating the bundle. The manifest is packaged into a JAR file along with the Java class file associated with our bundle; the whole JAR package is actually referred to as a bundle. 
+After implementing the Clojure source code for the bundle, we must also update
+our `project.clj` file so that the bundle's  manifest file is created,
+containing the meta-data needed by the OSGi framework for manipulating the
+bundle. The manifest is packaged into a JAR file along with the Java class
+file associated with our bundle; the whole JAR package is actually referred to
+as a bundle.
 
 Here is the [project.clj file](project.clj)
 
@@ -85,9 +107,26 @@ In particular, note the s-expression at `:felix` -> `:maven`:
    [:Embed-Transitive true]]]]
 ```
 
-This will get converted to XML using the function `clojure.data.xml/sexp-as-element` and then inserted into a `pom.xml` file so that the bundle may be created properly. This approach was used in order to put as little in the way of developers that need full control over the configuration of their bundles.
+This will get converted to XML using the function
+`clojure.data.xml/sexp-as-element` and then inserted into a `pom.xml` file so
+that the bundle may be created properly. This approach was used in order to put
+as little in the way of developers that need full control over the configuration
+of their bundles.
 
-Some of the meta-data in that s-expression is for human consumption, for instance, when the Felix shell (Gogo) is run and the  bundles are listed with the `lb` command. Other tags affect the OSGi framework, such as `Bundle-Activator` and `Import-Package`. The `Bundle-Activator` tag tells the framework which class implements the `BundleActivator` interface. With this information, when the OSGi framework starts the bundle, an instance of the specified class is created and its `start` method is invoked. The created instance will also have its `stop` method called when the framework stops the bundle. The `Import-Package` attribute informs the framework of the bundle's dependencies on external packages. Those who are familiar with OSGi may think something is missing here, but note the `lein felix` plugin (and other plugins upon which it depends) takes care of adding OSGi and Clojure boilerplate so that you don't have to. Any packages dependencies will be verified and resolved by the OSGi framework.
+Some of the meta-data in that s-expression is for human consumption, for
+instance, when the Felix shell (Gogo) is run and the  bundles are listed with
+the `lb` command. Other tags affect the OSGi framework, such as
+`Bundle-Activator` and `Import-Package`. The `Bundle-Activator` tag tells the
+framework which class implements the `BundleActivator` interface. With this
+information, when the OSGi framework starts the bundle, an instance of the
+specified class is created and its `start` method is invoked. The created
+instance will also have its `stop` method called when the framework stops the
+bundle. The `Import-Package` attribute informs the framework of the bundle's
+dependencies on external packages. Those who are familiar with OSGi may think
+something is missing here, but note the `lein felix` plugin (and other plugins
+upon which it depends) takes care of adding OSGi and Clojure boilerplate so
+that you don't have to. Any packages dependencies will be verified and
+resolved by the OSGi framework.
 
 Now we need to compile the source code, using the `lein` tool:
 
@@ -95,21 +134,26 @@ Now we need to compile the source code, using the `lein` tool:
 $ lein jar
 ```
 
-This will compile the example project code and create a jar file in the `./target`  directory.
+This will compile the example project code and create a jar file in the
+`./target`  directory.
 
-Next we need to create the bundle file (which will have a generated OSGi manifest file, used by frameworks):
+Next we need to create the bundle file (which will have a generated OSGi
+manifest file, used by frameworks):
 
 ```
 $ lein felix bundle create
 ```
 
-As you develop, and thus debug, OSGi application, you'll want to see detailed output of the create command. You can do this by passing the `-v` verbose flag:
+As you develop, and thus debug, OSGi application, you'll want to see detailed
+output of the create command. You can do this by passing the `-v` verbose
+flag:
 
 ```
 $ lein felix bundle create -v
 ```
 
-With our bundle created, we're ready to install it into the Felix bundle directory:
+With our bundle created, we're ready to install it into the Felix bundle
+directory:
 
 ```
 $ lein felix bundle install target/example1-0.1.0.jar
@@ -145,10 +189,11 @@ Service of type org.apache.felix.gogo.jline.Shell registered.
 ____________________________
 Welcome to Apache Felix Gogo
 
-g!     
+g!
 ```
 
-And there you see the output of our `Activator` class, created in Clojure using `gen-class`!
+And there you see the output of our `Activator` class, created in Clojure
+using `gen-class`!
 
 In Gogo, you can list the bundles with `lb`:
 
