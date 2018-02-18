@@ -198,7 +198,7 @@ using `gen-class`!
 In Gogo, you can list the bundles with `lb`:
 
 ```
-g! lb                                                                                                                                                                                                                                                                   02:21:41
+g! lb
 START LEVEL 1
    ID|State      |Level|Name
     0|Active     |    0|System Bundle (5.6.10)|5.6.10
@@ -215,8 +215,34 @@ START LEVEL 1
 We can also stop and restart our service:
 
 ```
-g! stop 2                                                                                                                                                                                                                                                               02:21:48
+g! stop 2
 Stopped listening for service events.
-g! start 2                                                                                                                                                                                                                                                              02:22:44
+```
+```
+g! start 2
 Starting to listen for service events ...
 ```
+
+Finally, when we quit the shell with `^D`, we can see the system shutting down
+and sending events to our service:
+
+```
+g!
+gosh: stopping framework
+Service of type org.apache.felix.service.command.CommandProcessor unregistered.
+Service of type org.apache.felix.gogo.jline.Shell unregistered.
+Service of type org.apache.felix.gogo.jline.Builtin unregistered.
+Service of type org.apache.felix.gogo.jline.Procedural unregistered.
+Service of type org.apache.felix.service.command.Converter unregistered.
+Service of type org.apache.felix.gogo.jline.Posix unregistered.
+Service of type org.apache.felix.service.threadio.ThreadIO unregistered.
+Service of type org.apache.felix.gogo.command.Basic unregistered.
+Service of type org.apache.felix.gogo.command.Inspect unregistered.
+Service of type org.apache.felix.gogo.command.Files unregistered.
+Service of type org.apache.felix.bundlerepository.RepositoryAdmin unregistered.
+Service of type org.osgi.service.repository.Repository unregistered.
+Service of type org.apache.felix.bundlerepository.impl.ObrGogoCommand unregistered.
+Service of type org.osgi.service.url.URLStreamHandlerService unregistered.
+Stopped listening for service events.
+```
+
