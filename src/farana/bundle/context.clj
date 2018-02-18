@@ -1,5 +1,8 @@
 (ns farana.bundle.context
+  (:require
+    [farana.util :as util])
   (:import
+    (java.util Dictionary)
     (org.osgi.framework BundleContext
                         ServiceListener)))
 
@@ -11,9 +14,18 @@
   [^BundleContext this ^ServiceListener listener]
   (.removeServiceListener this listener))
 
+(defn register-service
+  [^BundleContext this ^String klass ^Object service ^Dictionary properties]
+  (.registerService this
+                    klass
+                    service
+                    properties))
+
 (defn property
-  [^BundleContext this ^String key]
-  (.getProperty this key))
+  "The property key can be any type that the `name` function converts to a
+  string."
+  [^BundleContext this prop-key]
+  (.getProperty this (name prop-key)))
 
 (defn service
   [^BundleContext this]
