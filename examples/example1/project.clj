@@ -48,6 +48,6 @@
       ["felix" "bundle" "install" "target/example1-0.1.0.jar" "-v"]]
     "build" ["do"
       ["clean"]
-      ["compile"]
       ["felix-clean"]
+      ["jar"]
       ["felix-bundle"]]})
