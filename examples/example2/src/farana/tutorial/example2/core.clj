@@ -37,6 +37,8 @@
     ;; results in this error:
     ;;   java.lang.IllegalStateException: Attempting to call unbound fn:
     ;;      #'farana.bundle.context/register-service
+    ;; The following ticket has been created to track this issue:
+    ;;   https://github.com/starship-tools/farana/issues/3
     ;; (context/register-service ctx
     (.registerService ctx
                       (service/get-name)
