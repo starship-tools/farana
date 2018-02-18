@@ -45,7 +45,7 @@ For the impatient, the following steps will get you running the example OSGi ser
 
 For convenience, we have included some `lein` aliases in the `project.clj`. Most
 useful for iterative development is the `lein build` alias that does a bunch of
-cleanup and all the bundling.
+cleanup and all the bundling with just one command.
 
 
 ## Tutorial
