@@ -11,8 +11,7 @@
     [com.theoryinpractise/clojure.osgi "1.8.0-1"]
     [farana "0.1.0-SNAPSHOT"]]
   :plugins [
-    [lein-felix "0.3.0-SNAPSHOT"]
-    [lein-shell "0.5.0"]]
+    [lein-felix "0.3.0-SNAPSHOT"]]
   :aot :all
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
