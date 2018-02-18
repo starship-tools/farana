@@ -15,10 +15,17 @@ on the path to the stars.
 
 ## Usage
 
-For now, the best way to see how to use faraną is to look at the examples that
-have been ported from the
-[Apache Felix Tutorial](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial.html).
-So far, these include the following:
+For now, the best way to see how to use faraną is to look at the code in the
+`examples` directory, or better yet, read the tutorials! (linked below ...)
+
+
+## Examples
+
+The example files for this project are taken from the
+[Apache Felix Tutorial](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial.html)
+and then ported to Clojure using
+[lein-felix](https://github.com/starship-tools/lein-felix/tree/release/0.3.x)
+and the `farana` library. So far, these include the following:
 
 * [examples/example1](examples/example1)
 * [examples/example2](examples/example2)
