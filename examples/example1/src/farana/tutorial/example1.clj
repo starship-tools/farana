@@ -25,25 +25,32 @@
   utilizes the OSGi framework's event mechanism to listen for service events.
   Upon receiving a service event, it prints out the event's details."
   (:require
-    [clojusc.twig :as logger]
-    [taoensso.timbre :as log])
+    [clojure.osgi.services :as os])
   (:import
     (org.osgi.framework BundleActivator
                         BundleContext
                         ServiceEvent
                         ServiceListener))
   (:gen-class
+    :name farana.tutorial.example1.Activator
     :prefix "bundle-"
     :implements [
       org.osgi.framework.BundleActivator
       org.osgi.framework.ServiceListener]))
 
+(defn get-service-name
+  [event]
+  (-> event
+      (.getServiceReference)
+      (.getProperty "objectClass")
+      seq
+      first))
+
 (defn bundle-start
   "Implements `BundleActivator.start`. Logs a message and adds itself to the
   bundle context as a service listener."
   [this ^BundleContext context]
-  (logger/set-level! 'farana :info)
-  (log/info "Starting to listen for service events ...")
+  (println "Starting to listen for service events ...")
   ;; Note: It is not required that we remove the listener here,
   ;; since the framework will do it automatically anyway.
   (.addServiceListener context this))
@@ -53,17 +60,18 @@
   the bundle context as a service listener."
   [this ^BundleContext context]
   (.removeServiceListener context this)
-  (log/info "Stopped listening for service events."))
+  (println "Stopped listening for service events."))
 
 (defn bundle-serviceChanged
   "Implements `ServiceListener.serviceChanged`. Prints the details of any
   service event from the framework."
   [this ^ServiceEvent event]
-  (let [object-class (.getProperty (.getServiceReference event) "objectClass")]
-    (case (.getType event)
-      ServiceEvent.REGISTERED
-        (log/infof "Service of type %s registered." object-class)
-      ServiceEvent.UNREGISTERING
-        (log/infof "Service of type %s unregistered." object-class)
-      ServiceEvent.MODIFIED
-        (log/infof "Service of type %s modified." object-class))))
+  (let [service-name (get-service-name event)
+        event-type (.getType event)]
+    (condp = event-type
+      ServiceEvent/REGISTERED
+        (println (format "Service of type %s registered." service-name))
+      ServiceEvent/UNREGISTERING
+        (println (format "Service of type %s unregistered." service-name))
+      ServiceEvent/MODIFIED
+        (println (format "Service of type %s modified." service-name)))))

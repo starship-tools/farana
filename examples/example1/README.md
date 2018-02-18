@@ -4,11 +4,9 @@
 ## Dependencies
 
 * `lein`
-* `felix`
 
-To download Felix, visit the [downloads page]() and look for a section titled
-"Felix Framework Distribution". The instructions below assume you extracted
-the contents of the distribution to `/opt/felix/x.y.z`.
+This example project includes a `lein` plugin that will download Felix into
+your project directory.
 
 
 ## Instructions
@@ -16,11 +14,20 @@ the contents of the distribution to `/opt/felix/x.y.z`.
 ### Build
 
 1. `cd` to `examples/example1`
-1. Build an uberjar: `lein uberjar`
-1. Note the absolute path
+1. Create an OSGi bundle for the project: `lein felix bundle create -v`
+1. Install the generated `.jar` file in the local Felix installation:
+   `lein felix bundle install target/example1-0.1.0.jar -v`
+
 
 ### Start
 
-1. `cd` to `/opt/felix/x.y.z`
-1. Start the `felix` shell: `java -jar bin/felix.jar`
-1. In the shell, run `start file:/home/you/lab/farana/examples/example1/target/example1-0.1.0-SNAPSHOT-standalone.jar`
+1. Start Gogo, the Felix shell: `./bin/felix`
+1. List the bundles: `lb`
+1. Look at the Clojure code that is doing all this!
+
+
+#### `lein` Aliases
+
+For convenience, we have included some `lein` aliases in the `project.clj`. Most
+useful for iterative development is the `lein build` alias that does a bunch of
+cleanup and all the bundling.

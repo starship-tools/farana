@@ -1,11 +1,3 @@
-(def felix-host "http://apache.claz.org")
-(def felix-dist "org.apache.felix.main.distribution")
-(def felix-version "5.6.10")
-(def felix-dist-file (str felix-dist "-" felix-version ".zip"))
-(def felix-install-dir "felix")
-(def felix-dir (str felix-install-dir "/felix-framework-" felix-version))
-(def felix-jar "bin/felix.jar")
-
 (defn get-banner
   []
   (str
@@ -28,12 +20,7 @@
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
     [org.apache.felix/org.apache.felix.main "5.6.10"]
     [org.clojure/clojure "1.8.0"]]
-  :plugins [
-    [lein-felix "0.2.0-SNAPSHOT"]]
   :profiles {
-    :felix-shell {
-      :shell {
-        :dir ~felix-dir}}
     :custom-repl {
       :repl-options {
         :init-ns farana.dev

@@ -5,24 +5,12 @@
 
 ## Usage
 
-Before using farana and Felix, you need to set up and start Felix. The
-following commands download, locally install, and run the latest supported
-version of Felix:
+For now, the best way to see how to use farana is to look at the examples that
+have been ported from the
+[Apache Felix Tutorial](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial.html).
+So far, these include the following:
 
-```
-$ lein felix setup
-```
-```
-Downloading Felix ...
-Unpacking Felix ...
-Created script 'bin/felix'.
-Felix setup completed.
-You can now start the Felix shell with 'bin/felix'.
-```
-```
-$ lein felix shell
-```
-
+* `examples/example1`
 
 ## License
 
