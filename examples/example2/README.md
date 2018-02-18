@@ -161,3 +161,25 @@ Welcome to Apache Felix Gogo
 g!
 ```
 
+When we quit out of the shell, we can see our dictionary service get
+automatically unregistered:
+
+```
+gosh: stopping framework
+Service of type org.apache.felix.gogo.jline.Procedural unregistered.
+Service of type org.apache.felix.gogo.jline.Builtin unregistered.
+Service of type org.apache.felix.service.command.Converter unregistered.
+Service of type org.apache.felix.gogo.jline.Shell unregistered.
+Service of type org.apache.felix.gogo.jline.Posix unregistered.
+Service of type org.apache.felix.service.command.CommandProcessor unregistered.
+Service of type org.apache.felix.service.threadio.ThreadIO unregistered.
+Service of type org.apache.felix.gogo.command.Basic unregistered.
+Service of type org.apache.felix.gogo.command.Inspect unregistered.
+Service of type org.apache.felix.gogo.command.Files unregistered.
+Service of type org.apache.felix.bundlerepository.RepositoryAdmin unregistered.
+Service of type org.osgi.service.repository.Repository unregistered.
+Service of type org.apache.felix.bundlerepository.impl.ObrGogoCommand unregistered.
+Service of type org.osgi.service.url.URLStreamHandlerService unregistered.
+Service of type farana.tutorial.example2.interface.IDictionary unregistered.
+Stopped listening for service events.
+```
