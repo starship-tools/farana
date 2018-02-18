@@ -43,10 +43,10 @@
       ["felix" "install"]]
     "felix-clean" ["do"
       ["felix" "clean" "-v"]
-      ["felix" "bundle" "uninstall" "example1-0.1.0.jar" "-v"]]
+      ["felix" "bundle" "uninstall" "-v"]]
     "felix-bundle" ["do"
       ["felix" "bundle" "create" "-v"]
-      ["felix" "bundle" "install" "target/example1-0.1.0.jar" "-v"]]
+      ["felix" "bundle" "install" "-v"]]
     "build" ["do"
       ["clean"]
       ["felix-clean"]

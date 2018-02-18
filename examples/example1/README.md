@@ -34,7 +34,7 @@ over this in more detail.
 1. Compile the project code and create a jar file: `lein jar`
 1. Create an OSGi bundle for the project: `lein felix bundle create -v`
 1. Install the generated `.jar` file in the local Felix installation:
-   `lein felix bundle install target/example1-0.1.0.jar -v`
+   `lein felix bundle install -v`
 
 
 ### Start
@@ -156,7 +156,7 @@ With our bundle created, we're ready to install it into the Felix bundle
 directory:
 
 ```
-$ lein felix bundle install target/example1-0.1.0.jar
+$ lein felix bundle install -v
 ```
 
 That is the last step needed before starting up the Felix shell:
