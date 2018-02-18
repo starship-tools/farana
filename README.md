@@ -10,7 +10,7 @@ have been ported from the
 [Apache Felix Tutorial](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial.html).
 So far, these include the following:
 
-* `examples/example1`
+* [examples/example1](farana/tree/master/examples/example1)
 
 ## License
 
