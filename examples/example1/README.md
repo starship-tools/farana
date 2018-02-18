@@ -3,6 +3,7 @@
 This is the Clojure companion to [Example 1 of the Java tutorial for Apache Felix](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial/apache-felix-tutorial-example-1.html).
 The tutorial text of the Java version has been adapted for Clojure below.
 
+
 ## Dependencies
 
 * `lein`
@@ -11,12 +12,22 @@ This example project includes a `lein` plugin that will download Felix into
 your project directory.
 
 
+## First Steps
+
+To following along with the tutorial below (as well as the "Quick Start"), you will first need to do the following:
+
+1. `git clone https://github.com/starship-tools/farana.git`
+1. `cd` to `farana/examples/example1`
+1. Download and install Felix in the local directory: `lein felix install`
+
+
 ## Quick Start
+
+For the impatient, the following steps will get you running the example OSGi service on your local Felix. For the patient, the tutorial section below goes over this in more detail.
+
 
 ### Build
 
-1. `cd` to `examples/example1`
-1. Download and install (in the local directory) felix: `lein felix install`
 1. Compile the project code and create a jar file: `lein jar`
 1. Create an OSGi bundle for the project: `lein felix bundle create -v`
 1. Install the generated `.jar` file in the local Felix installation:
@@ -35,6 +46,7 @@ your project directory.
 For convenience, we have included some `lein` aliases in the `project.clj`. Most
 useful for iterative development is the `lein build` alias that does a bunch of
 cleanup and all the bundling.
+
 
 ## Tutorial
 
