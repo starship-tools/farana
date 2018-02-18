@@ -71,7 +71,48 @@ the namespace is `farana.tutorial.example1`, we have used the `:name` option
 in `gen-class` to compile the Clojure to a class that will match a common Java
 nomenclature: `farana.tutorial.example1.Activator`.
 
-Here is the code: [farana.tutorial.example1](src/farana/tutorial/example1.clj)
+The source code is [here](src/farana/tutorial/example1.clj), but we'll also
+paste it, removing the docstrings and code comments for brevity:
+
+```clj
+(ns farana.tutorial.example1
+  (:require
+    [clojure.osgi.services :as os]
+    [farana.event :as event])
+  (:import
+    (org.osgi.framework BundleActivator
+                        BundleContext
+                        ServiceEvent
+                        ServiceListener))
+  (:gen-class
+    :name farana.tutorial.example1.Activator
+    :prefix "bundle-"
+    :implements [
+      org.osgi.framework.BundleActivator
+      org.osgi.framework.ServiceListener]))
+
+(defn bundle-start
+  [this ^BundleContext ctx]
+  (println "Starting to listen for service events ...")
+  (.addServiceListener ctx this))
+
+(defn bundle-stop
+  [this ^BundleContext ctx]
+  (.removeServiceListener ctx this)
+  (println "Stopped listening for service events."))
+
+(defn bundle-serviceChanged
+  [this ^ServiceEvent evt]
+  (let [service-name (event/service-name evt)
+        event-type (event/type evt)]
+    (condp = event-type
+      ServiceEvent/REGISTERED
+        (println (format "Service of type %s registered." service-name))
+      ServiceEvent/UNREGISTERING
+        (println (format "Service of type %s unregistered." service-name))
+      ServiceEvent/MODIFIED
+        (println (format "Service of type %s modified." service-name)))))
+```
 
 After implementing the Clojure source code for the bundle, we must also update
 our `project.clj` file so that the bundle's  manifest file is created,
