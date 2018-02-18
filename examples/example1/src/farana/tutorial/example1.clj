@@ -44,14 +44,14 @@
   bundle context as a service listener."
   [this ^BundleContext ctx]
   (println "Starting to listen for service events ...")
-  ;; Note: It is not required that we remove the listener here,
-  ;; since the framework will do it automatically anyway.
   (context/add-service-listener ctx this))
 
 (defn bundle-stop
   "Implements `BundleActivator.stop`. Logs a message and removes itself from
   the bundle context as a service listener."
   [this ^BundleContext ctx]
+  ;; Note: It is not required that we remove the listener here,
+  ;; since the framework will do it automatically anyway.
   (context/remove-service-listener ctx this)
   (println "Stopped listening for service events."))
 
