@@ -1,11 +1,12 @@
-(defproject farana/example1 "0.1.0"
+(defproject farana/example1 "0.1.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 1"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [com.theoryinpractise/clojure.osgi "1.8.0-1"]]
+    [com.theoryinpractise/clojure.osgi "1.8.0-1"]
+    [farana "0.1.0-SNAPSHOT"]]
   :plugins [
     [lein-felix "0.3.0-SNAPSHOT"]
     [lein-shell "0.5.0"]]

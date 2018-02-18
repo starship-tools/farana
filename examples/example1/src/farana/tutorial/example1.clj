@@ -25,7 +25,8 @@
   utilizes the OSGi framework's event mechanism to listen for service events.
   Upon receiving a service event, it prints out the event's details."
   (:require
-    [clojure.osgi.services :as os])
+    [clojure.osgi.services :as os]
+    [farana.event :as event])
   (:import
     (org.osgi.framework BundleActivator
                         BundleContext
@@ -38,36 +39,28 @@
       org.osgi.framework.BundleActivator
       org.osgi.framework.ServiceListener]))
 
-(defn get-service-name
-  [event]
-  (-> event
-      (.getServiceReference)
-      (.getProperty "objectClass")
-      seq
-      first))
-
 (defn bundle-start
   "Implements `BundleActivator.start`. Logs a message and adds itself to the
   bundle context as a service listener."
-  [this ^BundleContext context]
+  [this ^BundleContext ctx]
   (println "Starting to listen for service events ...")
   ;; Note: It is not required that we remove the listener here,
   ;; since the framework will do it automatically anyway.
-  (.addServiceListener context this))
+  (.addServiceListener ctx this))
 
 (defn bundle-stop
   "Implements `BundleActivator.stop`. Logs a message and removes itself from
   the bundle context as a service listener."
-  [this ^BundleContext context]
-  (.removeServiceListener context this)
+  [this ^BundleContext ctx]
+  (.removeServiceListener ctx this)
   (println "Stopped listening for service events."))
 
 (defn bundle-serviceChanged
   "Implements `ServiceListener.serviceChanged`. Prints the details of any
   service event from the framework."
-  [this ^ServiceEvent event]
-  (let [service-name (get-service-name event)
-        event-type (.getType event)]
+  [this ^ServiceEvent evt]
+  (let [service-name (event/service-name evt)
+        event-type (event/type evt)]
     (condp = event-type
       ServiceEvent/REGISTERED
         (println (format "Service of type %s registered." service-name))
