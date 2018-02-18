@@ -32,8 +32,7 @@
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName farana.tutorial.example1]
          [:Bundle-Activator farana.tutorial.example1.Activator]
-         [:Export-Package farana.tutorial.example1]
-         [:Import-Package "!sun.misc, clojure.*, *"]
+         [:Import-Package "!sun.misc, clojure.*, org.osgi.framework, *"]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
   :aliases {

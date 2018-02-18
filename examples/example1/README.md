@@ -77,8 +77,8 @@ paste it, removing the docstrings and code comments for brevity:
 ```clj
 (ns farana.tutorial.example1
   (:require
-    [clojure.osgi.services :as os]
-    [farana.event :as event])
+    [farana.service.event :as event]
+    [farana.bundle.context :as context])
   (:import
     (org.osgi.framework BundleActivator
                         BundleContext
@@ -94,11 +94,11 @@ paste it, removing the docstrings and code comments for brevity:
 (defn bundle-start
   [this ^BundleContext ctx]
   (println "Starting to listen for service events ...")
-  (.addServiceListener ctx this))
+  (context/add-service-listener ctx this))
 
 (defn bundle-stop
   [this ^BundleContext ctx]
-  (.removeServiceListener ctx this)
+  (context/remove-service-listener ctx this)
   (println "Stopped listening for service events."))
 
 (defn bundle-serviceChanged
@@ -106,11 +106,11 @@ paste it, removing the docstrings and code comments for brevity:
   (let [service-name (event/service-name evt)
         event-type (event/type evt)]
     (condp = event-type
-      ServiceEvent/REGISTERED
+      event/registered
         (println (format "Service of type %s registered." service-name))
-      ServiceEvent/UNREGISTERING
+      event/unregistering
         (println (format "Service of type %s unregistered." service-name))
-      ServiceEvent/MODIFIED
+      event/modified
         (println (format "Service of type %s modified." service-name)))))
 ```
 
