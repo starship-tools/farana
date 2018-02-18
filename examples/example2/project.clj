@@ -1,6 +1,6 @@
-(def example-ns 'farana.tutorial.example2)
-(def example-iface 'farana.tutorial.interface)
-(def example-activator 'farana.tutorial.example2.Activator)
+(def example-ns "farana.tutorial.example2")
+(def example-iface (str example-ns ".interface"))
+(def example-activator (str example-ns ".Activator"))
 
 (defproject farana/example2 "0.1.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 2"
@@ -13,7 +13,10 @@
     [farana "0.1.0-SNAPSHOT"]]
   :plugins [
     [lein-felix "0.3.0-SNAPSHOT"]]
-  :aot :all
+  :aot [
+    farana.tutorial.example2.interface
+    farana.tutorial.example2.service
+    farana.tutorial.example2.core]
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
@@ -27,16 +30,16 @@
        [:extensions true]
        [:configuration
         [:namespaces
-         [:namespace ~example-ns]
+         [:namespace ~(symbol example-ns)]
          [:compileDeclaredNamespaceOnly true]
          [:copyAllCompiledNamespaces true]]
         [:instructions
          [:Bundle-Name "Farana/Clojure Tutorial Example2 Bundle"]
          [:Bundle-Version "0.1.0"]
          [:Bundle-Vendor "Farana"]
-         [:Bundle-SymbolicName ~example-ns]
-         [:Bundle-Activator ~example-activator]
-         [:Export-Package ~example-iface]
+         [:Bundle-SymbolicName ~(symbol example-ns)]
+         [:Bundle-Activator ~(symbol example-activator)]
+         [:Export-Package ~(symbol example-iface)]
          [:Import-Package "!sun.misc, clojure.*, *"]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
