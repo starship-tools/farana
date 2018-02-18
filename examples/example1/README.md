@@ -16,6 +16,8 @@ your project directory.
 ### Build
 
 1. `cd` to `examples/example1`
+1. Download and install (in the local directory) felix: `lein felix install`
+1. Compile the project code and create a jar file: `lein jar`
 1. Create an OSGi bundle for the project: `lein felix bundle create -v`
 1. Install the generated `.jar` file in the local Felix installation:
    `lein felix bundle install target/example1-0.1.0.jar -v`
@@ -74,3 +76,90 @@ In particular, note the s-expression at `:felix` -> `:maven`:
 This will get converted to XML using the function `clojure.data.xml/sexp-as-element` and then inserted into a `pom.xml` file so that the bundle may be created properly. This approach was used in order to put as little in the way of developers that need full control over the configuration of their bundles.
 
 Some of the meta-data in that s-expression is for human consumption, for instance, when the Felix shell (Gogo) is run and the  bundles are listed with the `lb` command. Other tags affect the OSGi framework, such as `Bundle-Activator` and `Import-Package`. The `Bundle-Activator` tag tells the framework which class implements the `BundleActivator` interface. With this information, when the OSGi framework starts the bundle, an instance of the specified class is created and its `start` method is invoked. The created instance will also have its `stop` method called when the framework stops the bundle. The `Import-Package` attribute informs the framework of the bundle's dependencies on external packages. Those who are familiar with OSGi may think something is missing here, but note the `lein felix` plugin (and other plugins upon which it depends) takes care of adding OSGi and Clojure boilerplate so that you don't have to. Any packages dependencies will be verified and resolved by the OSGi framework.
+
+Now we need to compile the source code, using the `lein` tool:
+
+```
+$ lein jar
+```
+
+This will compile the example project code and create a jar file in the `./target`  directory.
+
+Next we need to create the bundle file (which will have a generated OSGi manifest file, used by frameworks):
+
+```
+$ lein felix bundle create
+```
+
+As you develop, and thus debug, OSGi application, you'll want to see detailed output of the create command. You can do this by passing the `-v` verbose flag:
+
+```
+$ lein felix bundle create -v
+```
+
+With our bundle created, we're ready to install it into the Felix bundle directory:
+
+```
+$ lein felix bundle install target/example1-0.1.0.jar
+```
+
+That is the last step needed before starting up the Felix shell:
+
+```
+$ ./bin/felix
+```
+
+Give it a few seconds after startup, and you'll see output like the following:
+
+```
+Starting Gogo, the Felix shell ...
+To exit Gogo, type ^D
+
+Starting to listen for service events ...
+Service of type org.apache.felix.bundlerepository.RepositoryAdmin registered.
+Service of type org.osgi.service.repository.Repository registered.
+Service of type org.apache.felix.bundlerepository.impl.ObrGogoCommand registered.
+Service of type org.osgi.service.url.URLStreamHandlerService registered.
+Service of type org.apache.felix.gogo.command.Basic registered.
+Service of type org.apache.felix.gogo.command.Inspect registered.
+Service of type org.apache.felix.gogo.command.Files registered.
+Service of type org.apache.felix.service.threadio.ThreadIO registered.
+Service of type org.apache.felix.service.command.CommandProcessor registered.
+Service of type org.apache.felix.service.command.Converter registered.
+Service of type org.apache.felix.gogo.jline.Builtin registered.
+Service of type org.apache.felix.gogo.jline.Procedural registered.
+Service of type org.apache.felix.gogo.jline.Posix registered.
+Service of type org.apache.felix.gogo.jline.Shell registered.
+____________________________
+Welcome to Apache Felix Gogo
+
+g!     
+```
+
+And there you see the output of our `Activator` class, created in Clojure using `gen-class`!
+
+In Gogo, you can list the bundles with `lb`:
+
+```
+g! lb                                                                                                                                                                                                                                                                   02:21:41
+START LEVEL 1
+   ID|State      |Level|Name
+    0|Active     |    0|System Bundle (5.6.10)|5.6.10
+    1|Active     |    1|ClojureOSGI (1.8.0.1)|1.8.0.1
+    2|Active     |    1|Farana/Clojure Tutorial Example1 Bundle (0.1.0)|0.1.0
+    3|Active     |    1|jansi (1.16.0)|1.16.0
+    4|Active     |    1|JLine Bundle (3.5.1)|3.5.1
+    5|Active     |    1|Apache Felix Bundle Repository (2.0.10)|2.0.10
+    6|Active     |    1|Apache Felix Gogo Command (1.0.2)|1.0.2
+    7|Active     |    1|Apache Felix Gogo JLine Shell (1.0.10)|1.0.10
+    8|Active     |    1|Apache Felix Gogo Runtime (1.0.10)|1.0.10
+```
+
+We can also stop and restart our service:
+
+```
+g! stop 2                                                                                                                                                                                                                                                               02:21:48
+Stopped listening for service events.
+g! start 2                                                                                                                                                                                                                                                              02:22:44
+Starting to listen for service events ...
+```
