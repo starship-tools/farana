@@ -1,4 +1,5 @@
 (def example-ns 'farana.tutorial.example2)
+(def example-iface 'farana.tutorial.interface)
 (def example-activator 'farana.tutorial.example2.Activator)
 
 (defproject farana/example2 "0.1.0-SNAPSHOT"
@@ -35,7 +36,7 @@
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName ~example-ns]
          [:Bundle-Activator ~example-activator]
-         [:Export-Package ~example-ns]
+         [:Export-Package ~example-iface]
          [:Import-Package "!sun.misc, clojure.*, *"]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
