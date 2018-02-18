@@ -41,3 +41,34 @@ This example creates a simple bundle that listens for OSGi service events. This 
 A bundle gains access to the OSGi framework using a unique instance of `BundleContext`. In order for a bundle to get its unique bundle context, it must implement the `BundleActivator` interface; this interface has two methods, `start` and `stop`, that both receive the bundle's context and are called when the bundle is started and stopped, respectively. In the following source code, our bundle implements the `BundleActivator` interface and uses the context to add itself as a listener for service events. Note that while the namespace is `farana.tutorial.example1`, we have used the `:name` option in `gen-class` to compile the Clojure to a class that will match a common Java nomenclature: `farana.tutorial.example1.Activator`.
 
 Here is the code: [farana.tutorial.example1](src/farana/tutorial/example1.clj)
+
+After implementing the Clojure source code for the bundle, we must also update our `project.clj` file so that the bundle's  manifest file is created, containing the meta-data needed by the OSGi framework for manipulating the bundle. The manifest is packaged into a JAR file along with the Java class file associated with our bundle; the whole JAR package is actually referred to as a bundle. 
+
+Here is the [project.clj file](project.clj)
+
+In particular, note the S-Expression at `:felix` -> `:maven`:
+
+```clj
+[:plugin
+ [:groupId "org.apache.felix"]
+ [:artifactId "maven-bundle-plugin"]
+ [:version "3.5.0"]
+ [:extensions true]
+ [:configuration
+  [:namespaces
+   [:namespace farana.tutorial.example1]
+   [:compileDeclaredNamespaceOnly true]
+   [:copyAllCompiledNamespaces true]]
+  [:instructions
+   [:Bundle-Name "Farana/Clojure Tutorial Example1 Bundle"]
+   [:Bundle-Version "0.1.0"]
+   [:Bundle-Vendor "Farana"]
+   [:Bundle-SymbolicName farana.tutorial.example1]
+   [:Bundle-Activator farana.tutorial.example1.Activator]
+   [:Export-Package farana.tutorial.example1]
+   [:Import-Package "!sun.misc, clojure.*, *"]
+   [:DynamicImport-Package "*"]
+   [:Embed-Transitive true]]]]
+```
+
+This will get converted to XML using the function `clojure.data.xml/sexp-as-element` and then inserted into a `pom.xml` file so that the bundle may be created properly. This approach was used in order to put as little in the way of developers that need full control over the configuration of their bundles.
