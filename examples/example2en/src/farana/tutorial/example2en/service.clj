@@ -1,9 +1,9 @@
-(ns farana.tutorial.example2.service
+(ns farana.tutorial.example2en.service
   (:require
     [clojure.string :as string])
   (:import
     (clojure.lang PersistentHashSet)
-  	(farana.tutorial.example2.interface IDictionary)))
+  	(farana.tutorial.example2en.interface IDictionary)))
 
 (defrecord Dictionary [dictionary]
   IDictionary

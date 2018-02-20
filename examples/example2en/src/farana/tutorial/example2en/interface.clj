@@ -1,4 +1,4 @@
-(ns farana.tutorial.example2.interface
+(ns farana.tutorial.example2en.interface
 	"This is namespace is for all project interfaces. This is used in the
 	example as one possible way -- of several -- to organize interfaces in
 	projects.

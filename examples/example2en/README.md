@@ -1,4 +1,4 @@
-# farana.tutorial.example2
+# farana.tutorial.example2-en
 
 This is the Clojure companion to [Example 2 of the Java tutorial for Apache Felix](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial/apache-felix-tutorial-example-2.html).
 The tutorial text of the Java version has been adapted for Clojure below.
@@ -26,10 +26,10 @@ In this particular example, we will create a dictionary service that we can
 use to check if a word exists, which indicates if the word is spelled
 correctly or not. We will start by defining a simple dictionary service
 interface
-([src/farana/tutorial/example2/interface.clj](src/farana/tutorial/example2/interface.clj)):
+([src/farana/tutorial/example2en/interface.clj](src/farana/tutorial/example2en/interface.clj)):
 
 ```clj
-(ns farana.tutorial.example2.interface)
+(ns farana.tutorial.example2en.interface)
 
 (definterface IDictionary
   (^Boolean checkWord [^String word]))
@@ -37,7 +37,7 @@ interface
 
 The service interface is quite simple, with only one method that needs to be
 implemented. Notice that we put the service interface in its own namespace
-instead of just putting it in `farana.tutorial.example2`. We did this because
+instead of just putting it in `farana.tutorial.example2en`. We did this because
 we need to share the interface definition with other bundles, therefore it is
 better to separate service interfaces that need to be shared from code that
 does not need to be shared. Such an approach ensures a strong separation
@@ -45,15 +45,15 @@ between interface and implementation.
 
 For demonstration purposes, we have put the implementation in its own namespace
 too
-([src/farana/tutorial/example2/service.clj](src/farana/tutorial/example2/service.clj)):
+([src/farana/tutorial/example2en/service.clj](src/farana/tutorial/example2en/service.clj)):
 
 ```clj
-(ns farana.tutorial.example2.service
+(ns farana.tutorial.example2en.service
   (:require
     [clojure.string :as string])
   (:import
     (clojure.lang PersistentHashSet)
-    (farana.tutorial.example2.interface IDictionary)))
+    (farana.tutorial.example2en.interface IDictionary)))
 
 (defrecord Dictionary [dictionary]
   IDictionary
@@ -78,26 +78,26 @@ In this case, we chose to create an implementation using `defrecord` vs. a
 idiomatic Clojure names.
 
 In the following source code,
-(see [src/farana/tutorial/example2/core.clj](src/farana/tutorial/example2/core.clj)
+(see [src/farana/tutorial/example2en/core.clj](src/farana/tutorial/example2en/core.clj)
 for docstrings and code comments) the bundle uses its bundle context to register the
 dictionary service. We implement the dictionary service as an inner class of
 the bundle activator class, but we could have also put it in a separate file.
 The source code for our bundle is as follows:
 
 ```clj
-(ns farana.tutorial.example2.core
+(ns farana.tutorial.example2en.core
   (:require
     [farana.service.event :as event]
     [farana.bundle.context :as context]
-    [farana.tutorial.example2.service :as service]
+    [farana.tutorial.example2en.service :as service]
     [farana.util :as util])
   (:import
-    (farana.tutorial.example2.interface IDictionary)
+    (farana.tutorial.example2en.interface IDictionary)
     (org.osgi.framework BundleActivator
                         BundleContext
                         ServiceEvent))
   (:gen-class
-    :name farana.tutorial.example2.Activator
+    :name farana.tutorial.example2en.Activator
     :prefix "bundle-"
     :implements [
       org.osgi.framework.BundleActivator]))
@@ -130,7 +130,20 @@ We can now build our new bundle (using our convenience alias defined in the
 `project.clj`) and run it in Felix:
 
 ```
-$ lein build && ./bin/felix
+$ lein build
+```
+
+If you didn't leave the Felix Gogo shell running, be sure to start it up:
+
+```
+$ ./bin/felix
+```
+
+If you did leave Gogo running, you don't need to quit and restart; Felix
+can load and start new bundles while running:
+
+```
+g! start file:bundle/example2-en-0.1.0-SNAPSHOT.jar
 ```
 
 Here's the output of the service messages showing our new dictionary service
@@ -180,6 +193,6 @@ Service of type org.apache.felix.bundlerepository.RepositoryAdmin unregistered.
 Service of type org.osgi.service.repository.Repository unregistered.
 Service of type org.apache.felix.bundlerepository.impl.ObrGogoCommand unregistered.
 Service of type org.osgi.service.url.URLStreamHandlerService unregistered.
-Service of type farana.tutorial.example2.interface.IDictionary unregistered.
+Service of type farana.tutorial.example2en.interface.IDictionary unregistered.
 Stopped listening for service events.
 ```

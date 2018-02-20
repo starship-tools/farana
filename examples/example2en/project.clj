@@ -1,8 +1,8 @@
-(def example-ns "farana.tutorial.example2")
+(def example-ns "farana.tutorial.example2en")
 (def example-iface (str example-ns ".interface"))
 (def example-activator (str example-ns ".Activator"))
 
-(defproject farana/example2 "0.1.0-SNAPSHOT"
+(defproject farana/example2-en "0.1.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 2"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
@@ -14,9 +14,9 @@
   :plugins [
     [lein-felix "0.3.0-SNAPSHOT"]]
   :aot [
-    farana.tutorial.example2.interface
-    farana.tutorial.example2.service
-    farana.tutorial.example2.core]
+    farana.tutorial.example2en.interface
+    farana.tutorial.example2en.service
+    farana.tutorial.example2en.core]
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
@@ -34,7 +34,7 @@
          [:compileDeclaredNamespaceOnly true]
          [:copyAllCompiledNamespaces true]]
         [:instructions
-         [:Bundle-Name "Farana/Clojure Tutorial Example2 Bundle"]
+         [:Bundle-Name "Farana/Clojure Tutorial Example2-en Bundle"]
          [:Bundle-Version "0.1.0"]
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName ~(symbol example-ns)]

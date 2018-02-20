@@ -1,4 +1,4 @@
-(ns farana.tutorial.example2.core
+(ns farana.tutorial.example2en.core
   "Adapted from the Apache Felix Tutorial, Example 2
 
   This example creates a simple bundle that uses the bundle context to
@@ -8,15 +8,15 @@
   (:require
     [farana.service.event :as event]
     [farana.bundle.context :as context]
-    [farana.tutorial.example2.service :as service]
+    [farana.tutorial.example2en.service :as service]
     [farana.util :as util])
   (:import
-    (farana.tutorial.example2.interface IDictionary)
+    (farana.tutorial.example2en.interface IDictionary)
     (org.osgi.framework BundleActivator
                         BundleContext
                         ServiceEvent))
   (:gen-class
-    :name farana.tutorial.example2.Activator
+    :name farana.tutorial.example2en.Activator
     :prefix "bundle-"
     :implements [
       org.osgi.framework.BundleActivator]))
