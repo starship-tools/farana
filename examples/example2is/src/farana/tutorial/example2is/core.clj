@@ -1,13 +1,13 @@
 (ns farana.tutorial.example2is.core
-  "Adapted from the Apache Felix Tutorial, Example 2
+  "Adapted from the Apache Felix Tutorial, Example 2 (is)
 
   This example creates a simple bundle that uses the bundle context to
   register an English language dictionary service with the OSGi framework.
   For demonstration purposes, both the dictionary service interface and the
   service implementation are defined in a separate namespaces."
   (:require
+    [farana.bundle.context.core :as context]
     [farana.service.event :as event]
-    [farana.bundle.context :as context]
     [farana.tutorial.example2is.service :as service]
     [farana.util :as util])
   (:import
@@ -33,17 +33,10 @@
                              "námskeiðið"
                              "fyrir"
                              "clojure"})]
-    ;; XXX This doesn't work right now ... calling the wrapper function
-    ;; results in this error:
-    ;;   java.lang.IllegalStateException: Attempting to call unbound fn:
-    ;;      #'farana.bundle.context/register-service
-    ;; The following ticket has been created to track this issue:
-    ;;   https://github.com/starship-tools/farana/issues/3
-    ;; (context/register-service ctx
-    (.registerService ctx
-                      (service/get-name)
-                      (service/create-dictionary initial-words)
-                      (util/map->hash-table {:language "Icelandic"}))))
+    (context/register-service ctx
+                              (service/get-name)
+                              (service/create-dictionary initial-words)
+                              (util/map->hash-table {:language "Icelandic"}))))
 
 (defn bundle-stop
   "Implements `BundleActivator.stop`. Does nothing since the framework will
