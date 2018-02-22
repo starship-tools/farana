@@ -1,20 +1,10 @@
-(ns farana.bundle.context
+(ns farana.bundle.context.impl
   (:require
     [farana.util :as util])
   (:import
     (java.util Dictionary)
     (org.osgi.framework BundleContext
-                        ServiceListener))
-  (:gen-class))
-
-(defprotocol BundleContextAPI
-  (add-service-listener [this listener])
-  (remove-service-listener [this listener])
-  (register-service [this klass service properties])
-  (service-references [this service-name service-query])
-  (unget-service [this service-reference])
-  (property [this prop-key])
-  (service [this]))
+                        ServiceListener)))
 
 (defrecord FaranaBundleContext [])
 
@@ -28,10 +18,7 @@
 
 (defn register-service
   [^BundleContext this ^String klass ^Object service ^Dictionary properties]
-  (.registerService this
-                    klass
-                    service
-                    properties))
+  (.registerService this klass service properties))
 
 (defn service-references
   [^BundleContext this ^String service-name ^String service-query]
@@ -48,8 +35,10 @@
   (.getProperty this (name prop-key)))
 
 (defn service
-  [^BundleContext this]
-  (.getService this))
+  ([this]
+   (.getService this))
+  ([this service-reference]
+   (.getService this service-reference)))
 
 (def behaviour
   {:add-service-listener add-service-listener
@@ -59,7 +48,3 @@
    :unget-service unget-service
    :property property
    :service service})
-
-(extend FaranaBundleContext
-        BundleContextAPI
-        behaviour)
