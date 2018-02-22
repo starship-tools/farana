@@ -3,7 +3,7 @@
 (def example-activator (str example-ns ".Activator"))
 
 (defproject farana/example3 "0.1.0-SNAPSHOT"
-  :description "Adapted from the Apache Felix Tutorial, Example 2"
+  :description "Adapted from the Apache Felix Tutorial, Example 3"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
