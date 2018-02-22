@@ -1,8 +1,8 @@
 # farana.tutorial.example2-is
 
-This is the Clojure companion to 
+This is the Clojure companion to
 [Example 2b of the Java tutorial for Apache Felix](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial/apache-felix-tutorial-example-2b.html).
-The tutorial text of the Java version has been adapted for Clojure below.
+The tutorial text of the Java version has been adapted for Clojure, below.
 
 As with the Java example, it is like the other Clojure example 2 in all ways
 but one: the language is different. This has manifested in two places in the
@@ -34,9 +34,11 @@ Registering dictionary service ...
 Service of type farana.tutorial.example2is.interface.IDictionary registered.
 ```
 
-We're going to need one of the namespaces from this tutorial in order to compile
-the next tutorial, so let's install this project's JAR file locally before we
-finish:
+Keep that Gogo shell active and the bundle we just installed running.
+
+We're going to need one of the namespaces from this tutorial in order to
+compile the next tutorial. So, in another terminal, let's install this
+project's JAR file locally before we finish up:
 
 ```
 $ lein install

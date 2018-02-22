@@ -22,6 +22,8 @@
        [:version "3.5.0"]
        [:extensions true]
        [:configuration
+        [:archive
+         [:addMavenDescriptor false]]
         [:namespaces
          [:namespace farana.tutorial.example1]
          [:compileDeclaredNamespaceOnly true]
@@ -32,7 +34,7 @@
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName farana.tutorial.example1]
          [:Bundle-Activator farana.tutorial.example1.Activator]
-         [:Import-Package "!sun.misc, clojure.*, org.osgi.framework, *"]
+         [:Import-Package "!sun.misc, clojure.*"]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
   :aliases {
@@ -40,13 +42,13 @@
       ["felix" "uninstall"]
       ["felix" "install"]]
     "felix-clean" ["do"
-      ["felix" "clean" "-v"]
+      ["clean"]
       ["felix" "bundle" "uninstall" "-v"]]
     "felix-bundle" ["do"
       ["felix" "bundle" "create" "-v"]
       ["felix" "bundle" "install" "-v"]]
     "build" ["do"
-      ["clean"]
       ["felix-clean"]
       ["jar"]
-      ["felix-bundle"]]})
+      ["felix-bundle"]
+      ["clean"]]})

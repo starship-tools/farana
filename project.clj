@@ -16,11 +16,14 @@
   :license {
     :name "Apache License, Version 2.0"
     :url "http://www.apache.org/licenses/LICENSE-2.0"}
+  :exclusions [
+    [org.clojure/clojure]]
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [org.apache.felix/org.apache.felix.main "5.6.10"]
     [org.clojure/clojure "1.8.0"]]
   :profiles {
+    :ubercompile {
+      :aot :all}
     :custom-repl {
       :repl-options {
         :init-ns farana.dev
@@ -41,6 +44,11 @@
         [lein-ancient "0.6.10"]]}}
   :aliases {
     ;; Dev
+    "local"
+      ["with-profile" "+ubercompile" "do"
+        ["clean"]
+        ["compile"]
+        ["install"]]
     "repl"
       ^{:doc "A custom blog REPL that overrides the default one"}
       ["with-profile" "+test,+custom-repl" "repl"]})

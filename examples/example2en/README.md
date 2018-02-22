@@ -1,7 +1,7 @@
 # farana.tutorial.example2-en
 
 This is the Clojure companion to [Example 2 of the Java tutorial for Apache Felix](http://felix.apache.org/documentation/tutorials-examples-and-presentations/apache-felix-osgi-tutorial/apache-felix-tutorial-example-2.html).
-The tutorial text of the Java version has been adapted for Clojure below.
+The tutorial text of the Java version has been adapted for Clojure, below.
 
 
 ## Prerequisites
@@ -87,15 +87,13 @@ The source code for our bundle is as follows:
 ```clj
 (ns farana.tutorial.example2en.core
   (:require
-    [farana.service.event :as event]
     [farana.bundle.context :as context]
     [farana.tutorial.example2en.service :as service]
     [farana.util :as util])
   (:import
     (farana.tutorial.example2en.interface IDictionary)
     (org.osgi.framework BundleActivator
-                        BundleContext
-                        ServiceEvent))
+                        BundleContext))
   (:gen-class
     :name farana.tutorial.example2en.Activator
     :prefix "bundle-"
@@ -111,10 +109,10 @@ The source code for our bundle is as follows:
                              "osgi"
                              "clojure"
                              "tutorial"})]
-    (.registerService ctx
-                      (service/get-name)
-                      (service/create-dictionary initial-words)
-                      (util/map->hash-table {:language "English"}))))
+    (context/register-service ctx
+                              (service/get-name)
+                              (service/create-dictionary initial-words)
+                              (util/map->hash-table {:language "English"}))))
 
 (defn bundle-stop
   [_this ^BundleContext _ctx])

@@ -51,13 +51,13 @@
       ["felix" "uninstall"]
       ["felix" "install"]]
     "felix-clean" ["do"
-      ["felix" "clean" "-v"]
+      ["clean"]
       ["felix" "bundle" "uninstall" "-v"]]
     "felix-bundle" ["do"
       ["felix" "bundle" "create" "-v"]
       ["felix" "bundle" "install" "-v"]]
     "build" ["do"
-      ["clean"]
       ["felix-clean"]
       ["jar"]
-      ["felix-bundle"]]})
+      ["felix-bundle"]
+      ["clean"]]})
