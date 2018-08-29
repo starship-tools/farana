@@ -8,7 +8,7 @@
     [com.theoryinpractise/clojure.osgi "1.8.0-1"]
     [farana "0.1.0-SNAPSHOT"]]
   :plugins [
-    [lein-felix "0.3.0-SNAPSHOT"]]
+    [lein-felix "0.3.0"]]
   :aot :all
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
@@ -19,7 +19,7 @@
       [:plugin
        [:groupId "org.apache.felix"]
        [:artifactId "maven-bundle-plugin"]
-       [:version "3.5.0"]
+       [:version "3.5.1"]
        [:extensions true]
        [:configuration
         [:archive
