@@ -1,21 +1,18 @@
-(ns farana.service.event
-  (:require [farana.bundle.context.core :as context])
+(ns farana.service.event.impl
+  (:require
+    [farana.util :as util])
   (:import
+    (java.util Dictionary)
     (org.osgi.framework ServiceEvent))
   (:refer-clojure :exclude [type]))
-
-(def modified ServiceEvent/MODIFIED)
-(def modified-endmatch ServiceEvent/MODIFIED_ENDMATCH)
-(def registered ServiceEvent/REGISTERED)
-(def unregistering ServiceEvent/UNREGISTERING)
 
 (defn service-reference
   [^ServiceEvent this]
   (.getServiceReference this))
 
 (defn property
-  [^ServiceEvent this ^String key]
-  (.getProperty this key))
+  [^ServiceEvent this ^String prop-key]
+  (.getProperty this prop-key))
 
 (defn service-name
   [^ServiceEvent this]
@@ -28,3 +25,9 @@
 (defn type
   [^ServiceEvent this]
   (.getType this))
+
+(def behaviour
+  {:service-reference service-reference
+   :service-name service-name
+   :property property
+   :type type})

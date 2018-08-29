@@ -25,7 +25,7 @@
   utilizes the OSGi framework's event mechanism to listen for service events.
   Upon receiving a service event, it prints out the event's details."
   (:require
-    [farana.service.event :as event]
+    [farana.service.event.core :as event]
     [farana.bundle.context.core :as context])
   (:import
     (org.osgi.framework BundleActivator

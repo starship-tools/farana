@@ -77,8 +77,8 @@ paste it, removing the docstrings and code comments for brevity:
 ```clj
 (ns farana.tutorial.example1
   (:require
-    [farana.service.event :as event]
-    [farana.bundle.context :as context])
+    [farana.service.event.core :as event]
+    [farana.bundle.context.core :as context])
   (:import
     (org.osgi.framework BundleActivator
                         BundleContext
@@ -234,7 +234,8 @@ g!
 ```
 
 And there you see the output of our `Activator` class, created in Clojure
-using `gen-class`!
+using `gen-class`! (On a bare-bones Felix install, you won't see that output
+when starting up Gogo.)
 
 In Gogo, you can list the bundles with `lb`:
 
