@@ -34,7 +34,7 @@
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]
         [clojusc/trifl "0.3.0"]
-        [clojusc/twig "0.3.1"]]}
+        [clojusc/twig "0.3.3"]]}
     :examples {
       :source-paths ["examples/src"]}
     :lint {
