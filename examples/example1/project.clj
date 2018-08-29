@@ -1,12 +1,16 @@
-(defproject farana/example1 "0.1.0"
+(require 'cemerick.pomegranate.aether)
+(cemerick.pomegranate.aether/register-wagon-factory!
+ "http" #(org.apache.maven.wagon.providers.http.HttpWagon.))
+
+(defproject farana/example1 "0.2.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 1"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [com.theoryinpractise/clojure.osgi "1.8.0-1"]
-    [farana "0.1.0"]]
+    [com.theoryinpractise/clojure.osgi "1.9.0-2"]
+    [farana "0.2.0-SNAPSHOT"]]
   :plugins [
     [lein-felix "0.3.0"]]
   :aot :all
@@ -30,7 +34,7 @@
          [:copyAllCompiledNamespaces true]]
         [:instructions
          [:Bundle-Name "Farana/Clojure Tutorial Example1 Bundle"]
-         [:Bundle-Version "0.1.0"]
+         [:Bundle-Version "0.2.0"]
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName farana.tutorial.example1]
          [:Bundle-Activator farana.tutorial.example1.Activator]

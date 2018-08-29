@@ -1,17 +1,21 @@
+(require 'cemerick.pomegranate.aether)
+(cemerick.pomegranate.aether/register-wagon-factory!
+ "http" #(org.apache.maven.wagon.providers.http.HttpWagon.))
+
 (def example-ns "farana.tutorial.example3")
 (def example-iface (str example-ns ".interface"))
 (def example-activator (str example-ns ".Activator"))
 
-(defproject farana/example3 "0.1.0"
+(defproject farana/example3 "0.2.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 3"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [com.theoryinpractise/clojure.osgi "1.8.0-1"]
-    [farana/example2-is "0.1.0"]
-    [farana "0.1.0"]]
+    [com.theoryinpractise/clojure.osgi "1.9.0-2"]
+    [farana/example2-is "0.2.0-SNAPSHOT"]
+    [farana "0.2.0-SNAPSHOT"]]
   :plugins [
     [lein-felix "0.3.0"]]
   :aot [
@@ -35,7 +39,7 @@
          [:copyAllCompiledNamespaces true]]
         [:instructions
          [:Bundle-Name "Farana/Clojure Tutorial example3 Bundle"]
-         [:Bundle-Version "0.1.0"]
+         [:Bundle-Version "0.2.0"]
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName ~(symbol example-ns)]
          [:Bundle-Activator ~(symbol example-activator)]
