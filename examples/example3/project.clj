@@ -1,15 +1,22 @@
-(defproject farana/example1 "0.1.0"
-  :description "Adapted from the Apache Felix Tutorial, Example 1"
+(def example-ns "farana.tutorial.example3")
+(def example-iface (str example-ns ".interface"))
+(def example-activator (str example-ns ".Activator"))
+
+(defproject farana/example3 "0.1.0"
+  :description "Adapted from the Apache Felix Tutorial, Example 3"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
     [com.theoryinpractise/clojure.osgi "1.8.0-1"]
+    [farana/example2-is "0.1.0"]
     [farana "0.1.0"]]
   :plugins [
     [lein-felix "0.3.0"]]
-  :aot :all
+  :aot [
+    farana.tutorial.example3.client
+    farana.tutorial.example3.core]
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
@@ -22,19 +29,21 @@
        [:version "3.5.1"]
        [:extensions true]
        [:configuration
-        [:archive
-         [:addMavenDescriptor false]]
         [:namespaces
-         [:namespace farana.tutorial.example1]
+         [:namespace ~(symbol example-ns)]
          [:compileDeclaredNamespaceOnly true]
          [:copyAllCompiledNamespaces true]]
         [:instructions
-         [:Bundle-Name "Farana/Clojure Tutorial Example1 Bundle"]
+         [:Bundle-Name "Farana/Clojure Tutorial example3 Bundle"]
          [:Bundle-Version "0.1.0"]
          [:Bundle-Vendor "Farana"]
-         [:Bundle-SymbolicName farana.tutorial.example1]
-         [:Bundle-Activator farana.tutorial.example1.Activator]
-         [:Import-Package "!sun.misc, clojure.*"]
+         [:Bundle-SymbolicName ~(symbol example-ns)]
+         [:Bundle-Activator ~(symbol example-activator)]
+         [:Export-Package ~(symbol example-iface)]
+         [:Import-Package ~(str
+           "!sun.misc,"
+           "clojure.*,"
+           "*")]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
   :aliases {

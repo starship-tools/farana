@@ -1,5 +1,5 @@
 (ns farana.service.event
-  (:require [farana.bundle.context :as context])
+  (:require [farana.bundle.context.core :as context])
   (:import
     (org.osgi.framework ServiceEvent))
   (:refer-clojure :exclude [type]))

@@ -1,22 +1,22 @@
-(def example-ns "farana.tutorial.example2")
+(def example-ns "farana.tutorial.example4")
 (def example-iface (str example-ns ".interface"))
 (def example-activator (str example-ns ".Activator"))
 
-(defproject farana/example2 "0.1.0-SNAPSHOT"
-  :description "Adapted from the Apache Felix Tutorial, Example 2"
+(defproject farana/example4 "0.1.0"
+  :description "Adapted from the Apache Felix Tutorial, Example 4"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
     [com.theoryinpractise/clojure.osgi "1.8.0-1"]
-    [farana "0.1.0-SNAPSHOT"]]
+    [farana/example2-is "0.1.0"]
+    [farana "0.1.0"]]
   :plugins [
-    [lein-felix "0.3.0-SNAPSHOT"]]
+    [lein-felix "0.3.0"]]
   :aot [
-    farana.tutorial.example2.interface
-    farana.tutorial.example2.service
-    farana.tutorial.example2.core]
+    farana.tutorial.example4.client
+    farana.tutorial.example4.core]
   :felix {
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
@@ -26,7 +26,7 @@
       [:plugin
        [:groupId "org.apache.felix"]
        [:artifactId "maven-bundle-plugin"]
-       [:version "3.5.0"]
+       [:version "3.5.1"]
        [:extensions true]
        [:configuration
         [:namespaces
@@ -34,13 +34,16 @@
          [:compileDeclaredNamespaceOnly true]
          [:copyAllCompiledNamespaces true]]
         [:instructions
-         [:Bundle-Name "Farana/Clojure Tutorial Example2 Bundle"]
+         [:Bundle-Name "Farana/Clojure Tutorial example4 Bundle"]
          [:Bundle-Version "0.1.0"]
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName ~(symbol example-ns)]
          [:Bundle-Activator ~(symbol example-activator)]
          [:Export-Package ~(symbol example-iface)]
-         [:Import-Package "!sun.misc, clojure.*, *"]
+         [:Import-Package ~(str
+           "!sun.misc,"
+           "clojure.*,"
+           "*")]
          [:DynamicImport-Package "*"]
          [:Embed-Transitive true]]]]}
   :aliases {
@@ -48,13 +51,13 @@
       ["felix" "uninstall"]
       ["felix" "install"]]
     "felix-clean" ["do"
-      ["felix" "clean" "-v"]
+      ["clean"]
       ["felix" "bundle" "uninstall" "-v"]]
     "felix-bundle" ["do"
       ["felix" "bundle" "create" "-v"]
       ["felix" "bundle" "install" "-v"]]
     "build" ["do"
-      ["clean"]
       ["felix-clean"]
       ["jar"]
-      ["felix-bundle"]]})
+      ["felix-bundle"]
+      ["clean"]]})
