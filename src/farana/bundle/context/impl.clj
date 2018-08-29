@@ -6,8 +6,6 @@
     (org.osgi.framework BundleContext
                         ServiceListener)))
 
-(defrecord FaranaBundleContext [])
-
 (defn add-service-listener
   [^BundleContext this ^ServiceListener listener]
   (.addServiceListener this listener))

@@ -7,14 +7,12 @@
   service implementation are defined in a separate namespaces."
   (:require
     [farana.bundle.context.core :as context]
-    [farana.service.event :as event]
     [farana.tutorial.example2is.service :as service]
     [farana.util :as util])
   (:import
     (farana.tutorial.example2is.interface IDictionary)
     (org.osgi.framework BundleActivator
-                        BundleContext
-                        ServiceEvent))
+                        BundleContext))
   (:gen-class
     :name farana.tutorial.example2is.Activator
     :prefix "bundle-"

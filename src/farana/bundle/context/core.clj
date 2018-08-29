@@ -16,4 +16,3 @@
 (extend java.lang.Object
         FaranaBundleContext
         impl/behaviour)
-
