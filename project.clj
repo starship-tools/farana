@@ -33,15 +33,17 @@
       :source-paths ["dev-resources/src"]
       :dependencies [
         [org.clojure/tools.namespace "0.2.11"]
-        [clojusc/trifl "0.1.0-SNAPSHOT"]
+        [clojusc/trifl "0.3.0"]
         [clojusc/twig "0.3.1"]]}
     :examples {
       :source-paths ["examples/src"]}
-    :test {
+    :lint {
+      :source-paths ^:replace ["src"]
+      :test-paths ^:replace []
       :plugins [
-        [jonase/eastwood "0.2.3" :exclusions [org.clojure/clojure]]
-        [lein-kibit "0.1.5" :exclusions [org.clojure/clojure]]
-        [lein-ancient "0.6.10"]]}}
+        [jonase/eastwood "0.2.9"]
+        [lein-ancient "0.6.15"]
+        [lein-kibit "0.1.6"]]}}
   :aliases {
     ;; Dev
     "local"
@@ -51,4 +53,12 @@
         ["install"]]
     "repl"
       ^{:doc "A custom blog REPL that overrides the default one"}
-      ["with-profile" "+test,+custom-repl" "repl"]})
+      ["with-profile" "+test,+custom-repl" "repl"]
+    "check-vers" ["with-profile" "+lint" "ancient" "check" ":all"]
+    "check-jars" ["with-profile" "+lint" "do"
+      ["deps" ":tree"]
+      ["deps" ":plugin-tree"]]
+    "check-deps" ["do"
+      ["check-jars"]
+      ["check-vers"]]
+    "kibit" ["with-profile" "+lint" "kibit"]})
