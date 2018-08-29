@@ -2,7 +2,7 @@
 (def example-iface (str example-ns ".interface"))
 (def example-activator (str example-ns ".Activator"))
 
-(defproject farana/example3 "0.1.0-SNAPSHOT"
+(defproject farana/example3 "0.1.0"
   :description "Adapted from the Apache Felix Tutorial, Example 3"
   :url "https://github.com/starship-hackers/farana"
   :license {:name "Apache License, Version 2.0"
@@ -10,10 +10,10 @@
   :dependencies [
     [org.apache.felix/org.apache.felix.framework "5.6.10"]
     [com.theoryinpractise/clojure.osgi "1.8.0-1"]
-    [farana/example2-is "0.1.0-SNAPSHOT"]
-    [farana "0.1.0-SNAPSHOT"]]
+    [farana/example2-is "0.1.0"]
+    [farana "0.1.0"]]
   :plugins [
-    [lein-felix "0.3.0-SNAPSHOT"]]
+    [lein-felix "0.3.0"]]
   :aot [
     farana.tutorial.example3.client
     farana.tutorial.example3.core]
@@ -26,7 +26,7 @@
       [:plugin
        [:groupId "org.apache.felix"]
        [:artifactId "maven-bundle-plugin"]
-       [:version "3.5.0"]
+       [:version "3.5.1"]
        [:extensions true]
        [:configuration
         [:namespaces

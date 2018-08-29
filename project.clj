@@ -10,7 +10,7 @@
        ns
        "\u001B[35m]\u001B[33m λ\u001B[m=> "))
 
-(defproject farana "0.1.0-SNAPSHOT"
+(defproject farana "0.1.0"
   :description "A Clojure Wrapper for Apache Felix (OSGi Framework)"
   :url "https://github.com/starship-tools/farana"
   :license {
