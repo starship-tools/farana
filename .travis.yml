@@ -1,0 +1,9 @@
+language: clojure
+script:
+- lein build
+jdk:
+- oraclejdk8
+notifications:
+  slack:
+    rooms:
+      - starship-hackers:42Lkd47eUFXLCDYN9OTl5V5O#cicd

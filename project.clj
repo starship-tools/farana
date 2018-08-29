@@ -43,7 +43,15 @@
       :plugins [
         [jonase/eastwood "0.2.9"]
         [lein-ancient "0.6.15"]
-        [lein-kibit "0.1.6"]]}}
+        [lein-kibit "0.1.6"]]}
+    :test {
+      :plugins [
+        [lein-ltest "0.3.0"]]
+      :test-selectors {
+        :unit #(not (or (:integration %) (:system %)))
+        :integration :integration
+        :system :system
+        :default (complement :system)}}}
   :aliases {
     ;; Dev
     "local"
@@ -61,4 +69,14 @@
     "check-deps" ["do"
       ["check-jars"]
       ["check-vers"]]
-    "kibit" ["with-profile" "+lint" "kibit"]})
+    "lint" ["with-profile" "+lint" "kibit"]
+    "ltest" ["with-profile" "+test" "ltest"]
+    "ltest-clean" ["do"
+      ["clean"]
+      ["ltest"]]
+    "build" ["do"
+      ["clean"]
+      ; ["check-vers"]
+      ["lint"]
+      ["ltest" ":all"]
+      ["uberjar"]]})
