@@ -9,19 +9,22 @@
 (defproject farana/example2-en "0.2.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 2"
   :url "https://github.com/starship-hackers/farana"
-  :license {:name "Apache License, Version 2.0"
-            :url "http://www.apache.org/licenses/LICENSE-2.0"}
+  :license {
+    :name "Apache License, Version 2.0"
+    :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [
-    [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [com.theoryinpractise/clojure.osgi "1.9.0-2"]
+    [org.apache.felix/org.apache.felix.framework "6.0.1"]
+    [clojusc/clojure.osgi "1.9.0-3-SNAPSHOT"]
     [farana "0.2.0-SNAPSHOT"]]
   :plugins [
-    [lein-felix "0.3.0"]]
+    [lein-felix "0.4.0-SNAPSHOT"]]
   :aot [
     farana.tutorial.example2en.interface
     farana.tutorial.example2en.service
     farana.tutorial.example2en.core]
   :felix {
+    :clojure-osgi {
+       :id clojusc/clojure.osgi}
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
            ;; 'lein felix pom' command converts this S-Expr and inserts
@@ -41,7 +44,7 @@
          [:copyAllCompiledNamespaces true]]
         [:instructions
          [:Bundle-Name "Farana/Clojure Tutorial Example2-en Bundle"]
-         [:Bundle-Version "0.2.0"]
+         [:Bundle-Version "0.2.0-SNAPSHOT"]
          [:Bundle-Vendor "Farana"]
          [:Bundle-SymbolicName ~(symbol example-ns)]
          [:Bundle-Activator ~(symbol example-activator)]
@@ -61,6 +64,5 @@
       ["felix" "bundle" "install" "-v"]]
     "build" ["do"
       ["felix-clean"]
-      ["jar"]
       ["felix-bundle"]
       ["clean"]]})

@@ -31,8 +31,8 @@ over this in more detail.
 
 ### Build
 
-1. Compile the project code and create a jar file: `lein jar`
-1. Create an OSGi bundle for the project: `lein felix bundle create -v`
+1. Compile the project code, create a jar file, and create an OSGi bundle
+   for the project: `lein felix bundle create -v`
 1. Install the generated `.jar` file in the local Felix installation:
    `lein felix bundle install -v`
 
@@ -169,23 +169,15 @@ upon which it depends) takes care of adding OSGi and Clojure boilerplate so
 that you don't have to. Any packages dependencies will be verified and
 resolved by the OSGi framework.
 
-Now we need to compile the source code, using the `lein` tool:
-
-```
-$ lein jar
-```
-
-This will compile the example project code and create a jar file in the
-`./target`  directory.
-
-Next we need to create the bundle file (which will have a generated OSGi
-manifest file, used by frameworks):
+Now we need to create the bundle file (which will have a generated OSGi
+manifest file, used by frameworks). Note that this step also compiles
+any AOT'ed namespace and creates a `.jar` file before creating the bundle.
 
 ```
 $ lein felix bundle create
 ```
 
-As you develop, and thus debug, OSGi application, you'll want to see detailed
+As you develop, and thus debug, OSGi applications, you'll want to see detailed
 output of the create command. You can do this by passing the `-v` verbose
 flag:
 

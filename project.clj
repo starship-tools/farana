@@ -19,8 +19,8 @@
   :exclusions [
     [org.clojure/clojure]]
   :dependencies [
-    [org.apache.felix/org.apache.felix.framework "5.6.10"]
-    [org.clojure/clojure "1.9.0"]]
+    [org.apache.felix/org.apache.felix.framework "6.0.1"]
+    [clojusc/clojure.osgi "1.9.0-3-SNAPSHOT"]]
   :profiles {
     :ubercompile {
       :aot :all}
