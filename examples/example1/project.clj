@@ -1,7 +1,3 @@
-(require 'cemerick.pomegranate.aether)
-(cemerick.pomegranate.aether/register-wagon-factory!
- "http" #(org.apache.maven.wagon.providers.http.HttpWagon.))
-
 (defproject farana/example1 "0.2.0-SNAPSHOT"
   :description "Adapted from the Apache Felix Tutorial, Example 1"
   :url "https://github.com/starship-hackers/farana"
@@ -16,8 +12,6 @@
     [lein-felix "0.4.0-SNAPSHOT"]]
   :aot :all
   :felix {
-    :clojure-osgi {
-       :id clojusc/clojure.osgi}
     :maven ;; S-Expression representing the Maven XML configuration
            ;; used by org.apache.felix/maven-bundle-plugin. The
            ;; 'lein felix pom' command converts this S-Expr and inserts
